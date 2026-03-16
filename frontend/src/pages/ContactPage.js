@@ -1,41 +1,112 @@
+// frontend/src/pages/ContactPage.js
 import React from 'react';
-import PageHero from '../components/PageHero';
+import { contactHeroImg } from '../assets';
+import './ContactPage.css';
 
-const ContactPage = () => {
+export default function ContactPage() {
   return (
-    <>
-      <PageHero title="Contact Us" />
-      <div className="container">
-        <div className="page-container">
-          <p style={{textAlign: 'center', maxWidth: '600px', margin: '2.5rem auto'}}>
-            We'd love to hear from you! Whether you have a question about our menu, a suggestion, or just want to say hello, here's how you can reach us.
-          </p>
-          
-          <div className="contact-grid">
-            <div className="contact-details">
-              <h3>Our Location</h3>
-              <p>123 Mbuya Nehanda St<br />Harare, Zimbabwe</p>
+    <div className="contact-page">
 
-              <h3>Phone Orders</h3>
-              <p>+263 77 407 1792</p>
-              
-              <h3>Email Us</h3>
-              <p>order@chickencandy.co.zw</p>
-            </div>
-            <div className="contact-form-container">
-              <h3>Send us a Message</h3>
-              <form className="contact-form">
-                <input type="text" placeholder="Your Name" required />
-                <input type="email" placeholder="Your Email" required />
-                <textarea rows="6" placeholder="Your Message" required></textarea>
-                <button type="submit" className="btn btn-primary">Send Message</button>
-              </form>
-            </div>
-          </div>
+      {/* ── HERO — background from assets/contact-hero.jpg ── */}
+      <div
+        className="contact-page__hero"
+        style={contactHeroImg ? { backgroundImage: `url(${contactHeroImg})` } : {}}
+      >
+        {contactHeroImg && <div className="contact-page__hero-overlay" />}
+        <div className="container contact-page__hero-content">
+          <h1>Contact Us</h1>
+          <p>We're always ready to serve you.</p>
+          {!contactHeroImg && (
+            <p className="contact-page__hero-hint">Add <code>contact-hero.jpg</code> to <code>src/assets/</code></p>
+          )}
         </div>
       </div>
-    </>
-  );
-};
 
-export default ContactPage;
+      <div className="container contact-page__body">
+        <div className="contact-grid">
+
+          {/* INFO CARDS */}
+          <div className="contact-info">
+            <div className="contact-card">
+              <div className="contact-card__icon">📍</div>
+              <div>
+                <h3>Location</h3>
+                <p>2465 Gutu Junction<br />Gutu, Zimbabwe</p>
+              </div>
+            </div>
+            <div className="contact-card">
+              <div className="contact-card__icon">📞</div>
+              <div>
+                <h3>Phone / WhatsApp</h3>
+                <a href="tel:+263787902521">+263 787 902 521</a>
+                <a href="tel:+263710735811">+263 710 735 811</a>
+              </div>
+            </div>
+            <div className="contact-card">
+              <div className="contact-card__icon">🕐</div>
+              <div>
+                <h3>Opening Hours</h3>
+                <p>Monday – Sunday</p>
+                <p className="contact-hours-time">7:00 AM – 10:00 PM</p>
+              </div>
+            </div>
+            <div className="contact-card">
+              <div className="contact-card__icon">🛵</div>
+              <div>
+                <h3>Delivery</h3>
+                <p>We deliver! Call or WhatsApp to place your delivery order.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* GET IN TOUCH */}
+          <div className="contact-actions">
+            <h2>Get In Touch</h2>
+            <p>For reservations, catering, butchery orders, or any questions — reach us here:</p>
+
+            <div className="contact-actions__btns">
+              <a href="tel:+263787902521" className="contact-btn contact-btn--call">
+                <span>📞</span>
+                <div>
+                  <strong>Call Us</strong>
+                  <small>+263 787 902 521</small>
+                </div>
+              </a>
+              <a href="https://wa.me/263787902521" target="_blank" rel="noopener noreferrer" className="contact-btn contact-btn--whatsapp">
+                <span>💬</span>
+                <div>
+                  <strong>WhatsApp</strong>
+                  <small>Chat with us anytime</small>
+                </div>
+              </a>
+              <a href="tel:+263710735811" className="contact-btn contact-btn--call2">
+                <span>📱</span>
+                <div>
+                  <strong>Alternative Line</strong>
+                  <small>+263 710 735 811</small>
+                </div>
+              </a>
+            </div>
+
+            <div className="contact-map">
+              <h3>Find Us</h3>
+              <div className="contact-map__placeholder">
+                <span>🗺️</span>
+                <p>2465 Gutu Junction, Gutu, Zimbabwe</p>
+                <a
+                  href="https://maps.google.com/?q=Gutu+Junction,+Gutu,+Zimbabwe"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary"
+                >
+                  Open in Google Maps
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+}

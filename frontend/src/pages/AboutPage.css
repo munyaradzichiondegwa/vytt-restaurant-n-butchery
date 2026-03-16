@@ -1,0 +1,175 @@
+/* frontend/src/pages/AboutPage.css */
+
+/* ── HERO — about-hero.jpg is 1024×1536 PORTRAIT ──────────────────────
+   Portrait image: use cover + top anchor + tall min-height           */
+.about-page__hero {
+  background: linear-gradient(135deg, #1e6970 0%, #3296a0 60%, #2d8a94 100%);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  min-height: 700px;
+  padding: 120px 0 64px;
+  text-align: center;
+  position: relative;
+}
+
+.about-page__hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 58, 62, 0.5);
+}
+
+.about-page__hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.about-page__hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.about-page__hero p {
+  color: rgba(255,255,255,0.8);
+  font-size: 1.1rem;
+}
+
+.about-page__body { padding: 80px 20px; background: var(--sand); }
+
+/* Story */
+.about-story {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  align-items: start;
+  margin-bottom: 80px;
+}
+
+.about-story__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--teal);
+  margin-bottom: 12px;
+}
+
+.about-story__text h2 { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 24px; }
+.about-story__text p  { color: var(--gray); line-height: 1.8; margin-bottom: 16px; font-size: 1rem; }
+
+/* ── STORY VISUAL PANEL — about-story.jpg is 1024×1536 PORTRAIT ───────
+   Use contain so the full tall portrait image is never cropped.
+   The teal background fills space beside the image.                  */
+.about-story__visual {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-color: #1e6970;
+  min-height: 700px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+}
+
+/* When an actual image is loaded hide the card fallbacks */
+.about-story__visual[style*="background-image"] .about-story__card,
+.about-story__visual[style*="background-image"] .about-story__img-hint {
+  display: none;
+}
+
+.about-story__card {
+  padding: 24px;
+  border-radius: var(--radius);
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.about-story__card span { font-size: 2rem; flex-shrink: 0; }
+.about-story__card h3   { font-size: 1rem; margin-bottom: 6px; }
+.about-story__card p    { font-size: 0.87rem; line-height: 1.5; }
+
+.about-story__card--teal { background: rgba(50,150,160,0.2); }
+.about-story__card--teal h3 { color: #e6d7c8; }
+.about-story__card--teal p  { color: rgba(255,255,255,0.7); }
+
+.about-story__card--sand { background: rgba(230,215,200,0.15); }
+.about-story__card--sand h3 { color: #e6d7c8; }
+.about-story__card--sand p  { color: rgba(255,255,255,0.7); }
+
+.about-story__card--dark { background: rgba(0,0,0,0.3); }
+.about-story__card--dark h3 { color: var(--white); }
+.about-story__card--dark p  { color: rgba(255,255,255,0.6); }
+
+.about-story__img-hint {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  margin-top: auto;
+}
+
+/* Values */
+.about-values { margin-bottom: 80px; }
+.about-values h2 { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 40px; text-align: center; }
+
+.about-values__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.about-values__card {
+  text-align: center;
+  padding: 32px 20px;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(50,150,160,0.12);
+  transition: var(--transition);
+}
+
+.about-values__card:hover {
+  background: rgba(50,150,160,0.06);
+  box-shadow: 0 8px 32px rgba(50,150,160,0.15);
+  transform: translateY(-4px);
+}
+
+.about-values__card span { font-size: 2.4rem; display: block; margin-bottom: 12px; }
+.about-values__card h3   { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 10px; }
+.about-values__card p    { font-size: 0.87rem; color: var(--gray); line-height: 1.6; }
+
+/* CTA */
+.about-cta {
+  text-align: center;
+  background: linear-gradient(135deg, #1e6970, #3296a0);
+  border-radius: var(--radius-lg);
+  padding: 64px 40px;
+}
+
+.about-cta h2 { font-size: 2.5rem; color: var(--white); margin-bottom: 12px; }
+.about-cta p  { color: rgba(255,255,255,0.8); font-size: 1rem; margin-bottom: 32px; }
+
+.about-cta__btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.about-cta__btns .btn-primary { background: #e6d7c8; color: #1e6970; }
+.about-cta__book { background: rgba(255,255,255,0.15) !important; color: var(--white) !important; border: 2px solid var(--white) !important; }
+.about-cta__book:hover { background: var(--white) !important; color: #1e6970 !important; }
+
+@media (max-width: 1024px) {
+  .about-values__grid { grid-template-columns: repeat(2, 1fr); }
+  .about-page__hero   { min-height: 600px; }
+  .about-story__visual { min-height: 560px; }
+}
+
+@media (max-width: 768px) {
+  .about-story { grid-template-columns: 1fr; gap: 32px; }
+  .about-story__visual { min-height: 480px; }
+  .about-values__grid { grid-template-columns: repeat(2, 1fr); }
+  .about-page__hero { min-height: 500px; }
+}
+
+@media (max-width: 480px) {
+  .about-values__grid { grid-template-columns: 1fr; }
+  .about-story__visual { min-height: 380px; }
+}

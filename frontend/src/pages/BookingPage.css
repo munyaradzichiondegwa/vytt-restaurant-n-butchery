@@ -1,0 +1,275 @@
+/* frontend/src/pages/BookingPage.css */
+
+/* ── HERO — booking-hero.jpg is 864×1152 PORTRAIT (3:4) ───────────────
+   Portrait: tall min-height + top anchor so full image shows        */
+.booking-page__hero {
+  background: linear-gradient(135deg, #1e6970 0%, #3296a0 60%, #2d8a94 100%);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  min-height: 700px;
+  padding: 120px 0 64px;
+  text-align: center;
+  position: relative;
+}
+
+.booking-page__hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 58, 62, 0.5);
+}
+
+.booking-page__hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.booking-page__hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.booking-page__hero p {
+  color: rgba(255,255,255,0.8);
+  font-size: 1.05rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ── ANIMATED VENUE CARDS ── */
+.booking-page__venues {
+  background: var(--sand);
+  padding: 60px 0 40px;
+}
+
+.booking-page__venues h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.booking-venues__sub {
+  text-align: center;
+  color: var(--gray);
+  font-size: 0.95rem;
+  margin-bottom: 40px;
+}
+
+.booking-venues__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.booking-venue-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1.5px solid rgba(50,150,160,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: venueCardIn 0.5s ease forwards;
+}
+
+.booking-venue-card:nth-child(1) { animation-delay: 0.1s; }
+.booking-venue-card:nth-child(2) { animation-delay: 0.25s; }
+.booking-venue-card:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes venueCardIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.booking-venue-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(50,150,160,0.2);
+  border-color: var(--teal);
+}
+
+/* ── VENUE CARD IMAGE ── */
+.booking-venue-card__image {
+  height: 200px;
+  background: linear-gradient(135deg, #1e6970, #3296a0);
+  background-size: cover;
+  background-position: center center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.booking-venue-card__image-icon {
+  font-size: 4rem;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+}
+
+.booking-venue-card__image-hint {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+.booking-venue-card__body { padding: 24px; }
+
+.booking-venue-card__icon-sm { font-size: 1.5rem; margin-bottom: 10px; }
+
+.booking-venue-card__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: var(--text-dark);
+}
+
+.booking-venue-card__desc {
+  font-size: 0.87rem;
+  color: var(--gray);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.booking-venue-card__capacity {
+  display: inline-block;
+  background: rgba(50,150,160,0.1);
+  color: var(--teal-dark);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: 1px solid rgba(50,150,160,0.2);
+}
+
+/* ── FORM LAYOUT ── */
+.booking-page__body { padding: 60px 20px 80px; }
+
+.booking-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 40px;
+}
+
+.booking-info { display: flex; flex-direction: column; gap: 24px; }
+.booking-venue { display: flex; flex-direction: column; gap: 16px; }
+
+.booking-venue__card {
+  display: flex;
+  gap: 16px;
+  background: var(--sand);
+  border-radius: var(--radius);
+  padding: 20px;
+  align-items: flex-start;
+  transition: var(--transition);
+  border-left: 3px solid transparent;
+}
+
+.booking-venue__card:hover {
+  background: rgba(50,150,160,0.08);
+  border-left-color: var(--teal);
+}
+
+.booking-venue__icon { font-size: 2rem; flex-shrink: 0; }
+.booking-venue__card h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin-bottom: 6px; }
+.booking-venue__card p  { font-size: 0.87rem; color: var(--gray); line-height: 1.5; }
+
+.booking-contact {
+  background: linear-gradient(135deg, #1e6970, #3296a0);
+  border-radius: var(--radius);
+  padding: 24px;
+  color: rgba(255,255,255,0.85);
+}
+
+.booking-contact h4 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.1rem; margin-bottom: 6px; }
+.booking-contact p  { font-size: 0.85rem; margin-bottom: 12px; color: rgba(255,255,255,0.6); }
+.booking-contact a  { color: #e6d7c8; font-weight: 700; font-size: 1rem; display: block; margin-bottom: 6px; }
+
+/* Form */
+.booking-form {
+  background: var(--white);
+  border: 1px solid rgba(50,150,160,0.15);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+}
+
+.booking-form h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 28px; }
+
+.booking-error {
+  background: #fff0f0;
+  border: 1px solid var(--red);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  color: var(--red);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; color: var(--text-dark); }
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid rgba(50,150,160,0.2);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-family: 'Lato', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+  background: var(--white);
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--teal); }
+
+.booking-submit {
+  width: 100%;
+  text-align: center;
+  padding: 16px;
+  font-size: 1.05rem;
+  background: var(--teal) !important;
+}
+
+.booking-submit:hover   { background: var(--teal-dark) !important; }
+.booking-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+
+/* Success */
+.booking-success {
+  text-align: center;
+  padding: 80px 20px;
+  max-width: 500px;
+  margin: 80px auto 0;
+}
+
+.booking-success > div { font-size: 4rem; margin-bottom: 20px; }
+.booking-success h2    { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--teal); margin-bottom: 16px; }
+.booking-success p     { color: var(--gray); margin-bottom: 8px; font-size: 1rem; }
+.booking-success__contacts { display: flex; gap: 12px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+.booking-wa { background: #25D366 !important; }
+.booking-wa:hover { background: #1ebe59 !important; }
+
+@media (max-width: 1024px) {
+  .booking-page__hero { min-height: 580px; }
+}
+
+@media (max-width: 900px) {
+  .booking-venues__grid { grid-template-columns: 1fr 1fr; }
+  .booking-layout       { grid-template-columns: 1fr; }
+  .form-row             { grid-template-columns: 1fr; }
+  .booking-page__hero   { min-height: 500px; }
+}
+
+@media (max-width: 600px) {
+  .booking-venues__grid { grid-template-columns: 1fr; }
+  .booking-page__hero   { min-height: 420px; }
+}

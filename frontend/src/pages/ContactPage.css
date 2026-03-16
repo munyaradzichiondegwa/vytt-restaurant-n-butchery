@@ -1,0 +1,110 @@
+/* frontend/src/pages/ContactPage.css */
+
+/* ── HERO — contact-hero.jpg is 1536×1024 LANDSCAPE (3:2) ─────────────
+   Landscape: cover works well, needs sufficient height               */
+.contact-page__hero {
+  background: linear-gradient(135deg, #1e6970 0%, #3296a0 60%, #2d8a94 100%);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  min-height: 480px;
+  padding: 120px 0 64px;
+  text-align: center;
+  position: relative;
+}
+
+.contact-page__hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 58, 62, 0.5);
+}
+
+.contact-page__hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.contact-page__hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); color: var(--white); margin-bottom: 16px; }
+.contact-page__hero p  { color: rgba(255,255,255,0.8); font-size: 1.1rem; }
+
+.contact-page__body { padding: 72px 20px 80px; background: var(--sand); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 48px;
+}
+
+.contact-info { display: flex; flex-direction: column; gap: 16px; }
+
+.contact-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  border: 1px solid rgba(50,150,160,0.12);
+  border-left: 4px solid transparent;
+  transition: var(--transition);
+  box-shadow: 0 2px 12px rgba(50,150,160,0.06);
+}
+
+.contact-card:hover {
+  border-left-color: var(--teal);
+  box-shadow: 0 6px 24px rgba(50,150,160,0.15);
+}
+
+.contact-card__icon { font-size: 1.8rem; flex-shrink: 0; }
+.contact-card h3 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 6px; }
+.contact-card p  { font-size: 0.9rem; color: var(--gray); line-height: 1.5; }
+.contact-card a  { display: block; color: var(--teal-dark); font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; transition: color 0.2s; }
+.contact-card a:hover { color: var(--teal); }
+.contact-hours-time { color: var(--teal) !important; font-weight: 700 !important; }
+
+.contact-actions h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 12px; }
+.contact-actions > p { color: var(--gray); font-size: 0.95rem; margin-bottom: 28px; }
+
+.contact-actions__btns { display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+
+.contact-btn {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 24px;
+  border-radius: var(--radius-lg);
+  color: var(--white);
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.contact-btn span   { font-size: 1.6rem; flex-shrink: 0; }
+.contact-btn strong { display: block; font-size: 1rem; color: var(--white); }
+.contact-btn small  { display: block; font-size: 0.82rem; color: rgba(255,255,255,0.75); }
+
+.contact-btn:hover { transform: translateX(4px); }
+
+.contact-btn--call      { background: linear-gradient(135deg, #1e6970, #3296a0); }
+.contact-btn--call:hover { background: linear-gradient(135deg, #3296a0, #4db8c4); }
+.contact-btn--whatsapp  { background: linear-gradient(135deg, #1a5c2a, #25D366); }
+.contact-btn--whatsapp:hover { background: linear-gradient(135deg, #25D366, #1ebe59); }
+.contact-btn--call2     { background: linear-gradient(135deg, #0f3a3e, #1e6970); }
+.contact-btn--call2:hover { background: linear-gradient(135deg, #1e6970, #3296a0); }
+
+.contact-map h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 16px; }
+
+.contact-map__placeholder {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 48px 32px;
+  text-align: center;
+  border: 2px dashed rgba(50,150,160,0.3);
+}
+
+.contact-map__placeholder span { font-size: 3rem; display: block; margin-bottom: 12px; }
+.contact-map__placeholder p    { color: var(--gray); margin-bottom: 20px; font-size: 0.95rem; }
+
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-page__hero { min-height: 360px; }
+}

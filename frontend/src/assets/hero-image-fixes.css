@@ -1,0 +1,123 @@
+/* ══════════════════════════════════════════════════════════════════════
+   VYTT — Hero Image Fixes
+   Based on actual image dimensions:
+     hero.jpg         1080×1075  (square)
+     about-hero.jpg   1024×1536  (portrait 2:3)
+     about-story.jpg  1024×1536  (portrait 2:3)
+     booking-hero.jpg  864×1152  (portrait 3:4)
+     contact-hero.jpg 1536×1024  (landscape 3:2)
+     menu-hero.jpg    1536×1024  (landscape 3:2)
+
+   Paste these into your existing CSS files, replacing the matching
+   selectors. They override only the background-size/position/height.
+   ══════════════════════════════════════════════════════════════════════ */
+
+
+/* ── HOME HERO ─────────────────────────────────────────────────────────
+   hero.jpg is 1080×1075 — almost perfectly square.
+   cover works fine. The hero is full-viewport so the full image
+   shows on any screen wider than it is tall (all desktops/laptops).
+   On portrait phones the sides clip slightly — that is acceptable.  */
+.hero {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+
+/* ── MENU HERO ─────────────────────────────────────────────────────────
+   menu-hero.jpg is 1536×1024 — landscape 3:2.
+   cover at 380-420px height shows the full width and most of height. */
+.menu-page__hero {
+  min-height: 380px;
+  padding: 120px 0 64px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+
+/* ── CONTACT HERO ──────────────────────────────────────────────────────
+   contact-hero.jpg is 1536×1024 — landscape 3:2. Same as menu.    */
+.contact-page__hero {
+  min-height: 380px;
+  padding: 120px 0 64px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+
+/* ── ABOUT HERO ────────────────────────────────────────────────────────
+   about-hero.jpg is 1024×1536 — PORTRAIT (taller than wide).
+   cover will always crop a portrait image when the section is shorter
+   than the image's natural height. Solution: use a tall enough section
+   so the image has room to breathe, or use contain with a bg colour.
+
+   Best result for a section hero: use cover + position top so the
+   top of the portrait (which has the logo/title) is always visible,
+   and give it enough height so most of the image shows.             */
+.about-page__hero {
+  min-height: 600px;             /* tall enough for portrait to show well */
+  padding: 120px 0 64px;
+  background-size: cover;
+  background-position: center top;  /* anchor to top of portrait */
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* On large screens show even more of the portrait */
+@media (min-width: 1024px) {
+  .about-page__hero { min-height: 750px; }
+}
+
+
+/* ── ABOUT STORY PANEL ─────────────────────────────────────────────────
+   about-story.jpg is 1024×1536 — PORTRAIT 2:3.
+   It sits in a side panel. Use contain so none is cropped.
+   The panel background colour fills any gaps around the image.      */
+.about-strip__image,
+.about-story__visual {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-color: #1e6970;     /* teal fills any gap */
+  min-height: 520px;
+  border-radius: 16px;
+}
+
+@media (min-width: 1024px) {
+  .about-strip__image,
+  .about-story__visual {
+    min-height: 700px;           /* wider screens → taller panel to show more */
+  }
+}
+
+
+/* ── BOOKING HERO ──────────────────────────────────────────────────────
+   booking-hero.jpg is 864×1152 — PORTRAIT 3:4.
+   Same approach as about-hero: cover + top anchor + tall min-height. */
+.booking-page__hero {
+  min-height: 600px;
+  padding: 120px 0 64px;
+  background-size: cover;
+  background-position: center top;  /* anchor top of portrait */
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .booking-page__hero { min-height: 720px; }
+}
+
+
+/* ── RESPONSIVE ────────────────────────────────────────────────────────
+   On narrow screens portrait images need even more height to show    */
+@media (max-width: 600px) {
+  .about-page__hero    { min-height: 500px; background-position: center top; }
+  .booking-page__hero  { min-height: 500px; background-position: center top; }
+  .about-strip__image,
+  .about-story__visual { min-height: 400px; }
+}

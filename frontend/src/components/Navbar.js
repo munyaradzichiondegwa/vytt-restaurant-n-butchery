@@ -1,67 +1,61 @@
-import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { CartContext } from '../context/CartContext';
-import logo from '../assets/images/logo.png';
+import React, { useState, useEffect } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+import './Navbar.css';
 
-const Navbar = () => {
-  const navigate = useNavigate();
-  const { getCartCount } = useContext(CartContext);
-  const cartCount = getCartCount();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
-  const userInfo = localStorage.getItem('userInfo') 
-    ? JSON.parse(localStorage.getItem('userInfo')) 
-    : null;
+export default function Navbar() {
+  const { totalItems } = useCart();
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
-  const logoutHandler = () => {
-    localStorage.removeItem('userInfo');
-    setIsMenuOpen(false);
-    navigate('/');
-  };
-  
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location]);
+
+  const isHome = location.pathname === '/';
 
   return (
-    <header className="navbar">
-      <div className="container nav-container">
-        <Link to="/" className="nav-logo" onClick={() => setIsMenuOpen(false)}>
-          <img src={logo} alt="Chicken Candy Logo" />
+    <nav className={`navbar ${scrolled || !isHome ? 'navbar--solid' : ''} ${menuOpen ? 'navbar--open' : ''}`}>
+      <div className="container navbar__inner">
+        <Link to="/" className="navbar__logo">
+          <span className="navbar__logo-v">V</span>
+          <span className="navbar__logo-text">YTT</span>
+          <span className="navbar__logo-tag">Restaurant &amp; Butchery</span>
         </Link>
-        
-        <div className={`hamburger ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu}>
-          <div className="bar"></div>
-          <div className="bar"></div>
-          <div className="bar"></div>
-        </div>
 
-        <nav className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-          <Link to="/" onClick={toggleMenu}>Home</Link>
-          <Link to="/menu" onClick={toggleMenu}>Menu</Link>
-          <Link to="/about" onClick={toggleMenu}>About</Link>
-          <Link to="/contact" onClick={toggleMenu}>Contact</Link>
-          {userInfo && (
-             <Link to="/dashboard" onClick={toggleMenu}>Dashboard</Link>
-          )}
-        </nav>
+        <button
+          className="navbar__burger"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span></span><span></span><span></span>
+        </button>
 
-        <div className="nav-actions">
-          <Link to="/cart" className="cart-link">
-            Cart
-            {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
-          </Link>
-          {userInfo ? (
-            <div className="user-menu">
-              <button onClick={logoutHandler} className="btn btn-primary">Logout</button>
-            </div>
-          ) : (
-            <Link to="/auth" className="btn btn-primary">Login</Link>
-          )}
-        </div>
+        <ul className={`navbar__links ${menuOpen ? 'navbar__links--open' : ''}`}>
+          <li><NavLink to="/">Home</NavLink></li>
+          <li><NavLink to="/menu">Menu</NavLink></li>
+          <li><NavLink to="/booking">Book a Table</NavLink></li>
+          <li><NavLink to="/about">About</NavLink></li>
+          <li><NavLink to="/contact">Contact</NavLink></li>
+          <li>
+            <Link to="/cart" className="navbar__cart">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+              </svg>
+              {totalItems > 0 && <span className="navbar__cart-badge">{totalItems}</span>}
+              <span>Order</span>
+            </Link>
+          </li>
+        </ul>
       </div>
-    </header>
+    </nav>
   );
-};
-
-export default Navbar;
+}

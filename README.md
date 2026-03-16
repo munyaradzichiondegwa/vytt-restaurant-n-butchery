@@ -1,151 +1,107 @@
-# 🍗 Chicken Candy Website
+# VYTT App — Exact Drop-in Updates
+Every file here is a direct replacement for a file already in your project.
+No new folders. No new dependencies. Just copy each file to its path.
 
-**Live Demo:** https://chicken-candy-website.onrender.com/  
-**Repository:** https://github.com/munyaradzichiondegwa/chicken-candy-website
+## Step 1 — Backend files (run these first)
 
-A full‑stack **MERN (MongoDB, Express, React, Node.js)** application for online meal ordering and checkout. This project demonstrates a complete e‑commerce workflow where users can browse meals, place orders, and interact with a backend API.:contentReference[oaicite:2]{index=2}
+| File in this folder                          | Copy to in your project                        |
+|----------------------------------------------|------------------------------------------------|
+| backend/models/menuModel.js                  | vytt/backend/models/menuModel.js               |
+| backend/data/menuData.js                     | vytt/backend/data/menuData.js                  |
 
----
-
-## 🚀 Features
-
-- **Browse Meals:** Explore the available menu with clear item listings.
-- **Add to Cart:** Select meals and manage a shopping cart.
-- **Order Checkout:** Submit orders with client‑side validation.
-- **Responsive UI:** Designed to work across desktop and mobile devices.
-- **Full‑Stack Architecture:** Combines React frontend with Node/Express backend and MongoDB for data storage.:contentReference[oaicite:3]{index=3}
-
----
-
-## 📦 Tech Stack
-
-| Layer | Technology |
-|-------|-------------|
-| Frontend | React |
-| Styling | Tailwind CSS (or custom CSS) |
-| Backend | Node.js, Express.js |
-| Database | MongoDB |
-| Deployment | Render |
-
----
-
-## 🛠 Getting Started
-
-### Prerequisites
-
-Make sure you have the following installed:
-
-- Node.js (v16+)
-- npm or Yarn
-- MongoDB (local or Atlas)
-
----
-
-### Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/munyaradzichiondegwa/chicken-candy-website.git
-   cd chicken-candy-website
-````
-
-2. **Install dependencies:**
-
-   ```bash
-   npm install
-   ```
-
-3. **Set environment variables:**
-   Create a `.env` file with the following (example):
-
-   ```
-   MONGO_URI=<your_mongodb_connection_string>
-   PORT=5000
-   ```
-
-4. **Run the backend:**
-
-   ```bash
-   npm run dev
-   ```
-
-5. **Start the frontend:**
-
-   ```bash
-   npm start
-   ```
-
-6. **Open the app:**
-   Navigate to `http://localhost:3000` in your browser.
-
----
-
-## 📁 Folder Structure
-
+Then re-seed the database:
 ```
-chicken-candy-website/
-├─ backend/                # Express app and API
-├─ frontend/               # React UI
-├─ .env                   # Environment variables
-├─ package.json
-└─ README.md
+cd vytt/backend
+npm run data:import
 ```
 
 ---
 
-## 📌 Usage
+## Step 2 — Frontend files
 
-* Browse the menu on the homepage.
-* Add meals to the shopping cart.
-* Proceed to checkout and submit your order.
-* Data is stored in MongoDB and served via the Express API.
-
----
-
-## 🧪 Deployment
-
-This project can be deployed using services such as **Render** (as shown in the live demo), **Heroku**, or **Vercel**.
-Ensure environment variables (e.g., `MONGO_URI`) are correctly set in your hosting platform.
-
----
-
-## 🤝 Contributing
-
-Contributions welcome! To contribute:
-
-1. Fork the repository.
-2. Create a new branch:
-
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-3. Commit your changes:
-
-   ```bash
-   git commit -m "Add new feature"
-   ```
-4. Push to your branch:
-
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-5. Open a Pull Request.
+| File in this folder                                   | Copy to in your project                                      |
+|-------------------------------------------------------|--------------------------------------------------------------|
+| frontend/src/components/Navbar.css                    | vytt/frontend/src/components/Navbar.css                      |
+| frontend/src/components/MenuCard.js                   | vytt/frontend/src/components/MenuCard.js                     |
+| frontend/src/pages/MenuPage.js                        | vytt/frontend/src/pages/MenuPage.js                          |
+| frontend/src/pages/MenuPage.css                       | vytt/frontend/src/pages/MenuPage.css                         |
+| frontend/src/pages/HomePage.css                       | vytt/frontend/src/pages/HomePage.css                         |
+| frontend/src/pages/BookingPage.js                     | vytt/frontend/src/pages/BookingPage.js                       |
+| frontend/src/pages/BookingPage.css                    | vytt/frontend/src/pages/BookingPage.css                      |
+| frontend/src/pages/ContactPage.css                    | vytt/frontend/src/pages/ContactPage.css                      |
 
 ---
 
-## 📄 License
-
-This project is open‑source and available under the **MIT License**.
+## Files NOT changed (leave as-is)
+- vytt/frontend/src/App.js          ✅ unchanged
+- vytt/frontend/src/api.js          ✅ unchanged
+- vytt/frontend/src/context/CartContext.js  ✅ unchanged
+- vytt/frontend/src/index.css       ✅ unchanged
+- vytt/frontend/src/components/Footer.js   ✅ unchanged
+- vytt/backend/server.js            ✅ unchanged
+- vytt/backend/routes/*.js          ✅ unchanged
+- vytt/backend/models/orderModel.js ✅ unchanged
+- vytt/backend/models/bookingModel.js ✅ unchanged
+- vytt/backend/data/seeder.js       ✅ unchanged
 
 ---
 
-## 📬 Contact
+## What changed and why
 
-**Munyaradzi Chiondegwa**
+### Navbar.css
+- Background changed from `var(--dark)` (black) to forest green gradient
+  `#0d4f29 → #166016 → #1a6b3c`
+- Logo "V" changed from red to `#7de3a0` (mint green)
+- Cart badge changed from green to mint `#7de3a0` with dark green text
+- Active/hover link uses green glow instead of red glow
+- Mobile dropdown uses same green
 
-* GitHub: [https://github.com/munyaradzichiondegwa](https://github.com/munyaradzichiondegwa)
-* LinkedIn: [https://www.linkedin.com/in/munyaradzi-chiondegwa](https://www.linkedin.com/in/munyaradzi-chiondegwa)
-* Portfolio: [https://munyaradzichiondegwa.github.io/munyaradzi-chiondegwa-profile/](https://munyaradzichiondegwa.github.io/munyaradzi-chiondegwa-profile/)
+### menuModel.js
+- Added all 14 real Vittony Holdings categories to the `enum` array
+- Old 8 categories kept for backward compatibility with existing DB records
 
+### menuData.js
+- Replaced old 37 generic items with 91 real items transcribed from
+  the physical Vittony Holdings menu (both images)
+- All items use the new real category names
+- `isFeatured: true` set on key signature items for the home page
 
-[1]: https://munyaradzichiondegwa.github.io/munyaradzi-chiondegwa-profile/?utm_source=chatgpt.com "Portfolio - Munyaradzi Chiondegwa"
+### MenuCard.js
+- Added `categoryEmojis` entries for all 14 new categories
+- Handles `price === 0` (Tribes Treat) showing "Price varies" instead of "$0.00"
+
+### MenuPage.js
+- `CATEGORIES` and `CATEGORY_ICONS` updated to all 16 real categories
+- `STATIC_MENU` fallback replaced with all 91 real items
+- **Carousel/slideshow added** — cycles featured items every 10 seconds
+  with manual prev/next arrows and dot indicators
+- Carousel resets timer on manual navigation
+
+### MenuPage.css
+- Hero changed to green gradient (matches Navbar)
+- New `.menu-page__carousel` styles — full-width slideshow
+- Category tab `.active` state now green instead of red
+
+### HomePage.css
+- `.hero__title--accent` changed from `var(--red)` to `#7de3a0` (mint)
+- `specials__eyebrow` / `featured__eyebrow` changed to green
+- Services section background changed from `var(--dark)` to green gradient
+- Contact strip changed from red to green gradient
+- `hero__scroll-line` uses green tint
+- `.services-preview__card` hover uses green border instead of red
+
+### BookingPage.js + BookingPage.css
+- Hero background changed to green
+- Three new large animated venue cards added above the form
+  (Conference Room, Outdoor Catering, Table Reservation)
+- Each card slides up with a staggered animation on page load
+- Each card has a 📷 "Add photo" button to upload a custom image
+- Clicking a card auto-selects the matching event type in the form
+  and scrolls to the form
+- Green theme throughout
+
+### ContactPage.css
+- Hero background changed to green gradient
+- `.contact-page__hero-bg` div supports an embossed background image
+- Contact cards get green left-border on hover
+- Call/WhatsApp/map buttons use green gradients

@@ -1,0 +1,293 @@
+/* frontend/src/pages/MenuPage.css */
+
+/* ── HERO ── */
+.menu-page__hero {
+  background: linear-gradient(135deg, #1e6970 0%, #3296a0 60%, #2d8a94 100%);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  min-height: 480px;
+  padding: 120px 0 64px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-page__hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+}
+
+.menu-page__hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.menu-page__hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  color: var(--white);
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.menu-page__hero p {
+  color: rgba(255,255,255,0.85);
+  font-size: 1.05rem;
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ── CAROUSEL ── */
+.menu-page__carousel {
+  position: relative;
+  background: linear-gradient(135deg, #0f3a3e 0%, #1e6970 50%, #3296a0 100%);
+  overflow: hidden;
+  height: 260px;
+}
+
+.menu-page__carousel-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.menu-page__carousel-slide {
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 32px 80px;
+}
+
+.menu-page__carousel-emoji {
+  font-size: 5rem;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+}
+
+.menu-page__carousel-info { flex: 1; }
+
+.menu-page__carousel-cat {
+  display: inline-block;
+  background: rgba(230,215,200,0.2);
+  color: rgba(255,255,255,0.9);
+  border-radius: 20px;
+  padding: 3px 14px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.menu-page__carousel-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.menu-page__carousel-desc {
+  color: rgba(255,255,255,0.75);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  max-width: 480px;
+}
+
+.menu-page__carousel-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #e6d7c8;
+}
+
+.menu-page__carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(230,215,200,0.15);
+  border: 1px solid rgba(230,215,200,0.35);
+  color: var(--white);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  z-index: 2;
+}
+
+.menu-page__carousel-btn:hover { background: rgba(230,215,200,0.3); }
+.menu-page__carousel-btn--prev { left: 20px; }
+.menu-page__carousel-btn--next { right: 20px; }
+
+.menu-page__carousel-dots {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+}
+
+.menu-page__carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(230,215,200,0.4);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s;
+}
+
+.menu-page__carousel-dot.active {
+  background: #e6d7c8;
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* ── BODY — sits on sand page background ── */
+.menu-page__body {
+  padding: 48px 20px 80px;
+}
+
+/* ── SEARCH ── */
+.menu-page__search {
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto 32px;
+}
+
+.menu-page__search input {
+  width: 100%;
+  padding: 14px 44px 14px 20px;
+  border: 2px solid rgba(50,150,160,0.25);
+  border-radius: 30px;
+  font-size: 1rem;
+  font-family: 'Lato', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+  background: var(--white);
+}
+
+.menu-page__search input:focus {
+  border-color: var(--teal);
+}
+
+.menu-page__search-clear {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--gray-light);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px;
+}
+
+/* ── CATEGORY TABS ── */
+.menu-page__tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+  justify-content: center;
+}
+
+.menu-page__tab {
+  background: var(--white);
+  color: var(--teal-dark);
+  border: 1.5px solid rgba(50,150,160,0.3);
+  padding: 9px 18px;
+  border-radius: 30px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: 'Lato', sans-serif;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.menu-page__tab:hover {
+  border-color: var(--teal);
+  background: rgba(50,150,160,0.06);
+}
+
+.menu-page__tab.active {
+  background: var(--teal);
+  color: var(--white);
+  border-color: var(--teal);
+}
+
+/* ── GRID ── */
+.menu-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+/* ── STATES ── */
+.menu-page__loading {
+  display: flex;
+  justify-content: center;
+  padding: 80px;
+}
+
+.menu-page__empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--gray);
+}
+
+.menu-page__empty span { font-size: 3rem; display: block; margin-bottom: 16px; }
+.menu-page__empty p    { font-size: 1.05rem; }
+
+/* ── WHATSAPP CTA ── */
+.menu-page__wa {
+  text-align: center;
+  margin-top: 64px;
+  padding: 40px;
+  background: linear-gradient(135deg, #1e6970, #3296a0);
+  border-radius: var(--radius-lg);
+}
+
+.menu-page__wa p {
+  color: rgba(255,255,255,0.9);
+  font-size: 1.05rem;
+  margin-bottom: 20px;
+}
+
+.menu-page__wa .btn-primary {
+  background: #e6d7c8;
+  color: #1e6970;
+}
+
+.menu-page__wa .btn-primary:hover {
+  background: #f2ebe0;
+  box-shadow: none;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .menu-page__carousel { height: auto; min-height: 220px; }
+  .menu-page__carousel-slide { flex-direction: column; padding: 24px 48px 40px; text-align: center; gap: 12px; }
+  .menu-page__carousel-emoji { font-size: 3.5rem; }
+  .menu-page__carousel-desc  { display: none; }
+  .menu-page__carousel-btn--prev { left: 8px; }
+  .menu-page__carousel-btn--next { right: 8px; }
+  .menu-page__hero { min-height: 360px; }
+}
+
+@media (max-width: 480px) {
+  .menu-page__tabs { justify-content: flex-start; }
+  .menu-page__grid { grid-template-columns: 1fr; }
+}

@@ -1,59 +1,51 @@
-// Load environment variables
-import 'dotenv/config';
-
 import express from 'express';
 import cors from 'cors';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-import connectDB from './config/db.js';
-
-// Import Routes
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 import menuRoutes from './routes/menuRoutes.js';
-import authRoutes from './routes/authRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
+import bookingRoutes from './routes/bookingRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
-// Connect to Database
-connectDB();
+dotenv.config();
 
 const app = express();
 
-// ---------------------
-// CORS Middleware
-// ---------------------
-// Only allow your frontend domain
-const allowedOrigins = [
-  'https://chicken-candy-website.onrender.com',
-  'http://localhost:3000' // optional for local dev
-];
-
-app.use(cors({
-  origin: allowedOrigins,
-  credentials: true,
-}));
-
-// Body parser
+app.use(cors());
 app.use(express.json());
 
-// API Routes
+// Connect to MongoDB
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.error(`Error: ${error.message}`);
+    process.exit(1);
+  }
+};
+
+connectDB();
+
+// Routes
 app.use('/api/menu', menuRoutes);
-app.use('/api/auth', authRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/bookings', bookingRoutes);
+app.use('/api/users', userRoutes);
 
-// ---------------------
-// Serve React frontend
-// ---------------------
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-app.use(express.static(path.join(__dirname, '../frontend/build')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
+// Health check
+app.get('/', (req, res) => {
+  res.json({ message: 'VYTT Restaurant and Butchery API running' });
 });
 
-// ---------------------
-// Start server
-// ---------------------
-const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => console.log(`Backend server running on port ${PORT}`));
+// Error handler
+app.use((err, req, res, next) => {
+  const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
+  res.status(statusCode).json({
+    message: err.message,
+    stack: process.env.NODE_ENV === 'production' ? null : err.stack,
+  });
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -1,7 +1,7 @@
 {
-  "name": "chicken-candy-backend",
+  "name": "vytt-backend",
   "version": "1.0.0",
-  "description": "Backend for Chicken Candy fast food app.",
+  "description": "Backend for VYTT Restaurant and Butchery app.",
   "main": "server.js",
   "type": "module",
   "scripts": {

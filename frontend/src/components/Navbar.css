@@ -1,0 +1,172 @@
+/* frontend/src/components/Navbar.css */
+/* Nav background: Vittony teal #3296a0 extracted from menu images */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  padding: 20px 0;
+  /* Semi-transparent teal when floating over hero */
+  background: rgba(26, 90, 96, 0.92);
+  backdrop-filter: blur(8px);
+}
+
+.navbar--solid {
+  background: linear-gradient(135deg, #1e6970 0%, #3296a0 60%, #2d8a94 100%);
+  padding: 12px 0;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.25);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar__logo {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  text-decoration: none;
+}
+
+.navbar__logo-v {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  /* Warm sand color for the V — pops against teal */
+  color: #e6d7c8;
+  line-height: 1;
+}
+
+.navbar__logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+}
+
+.navbar__logo-tag {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-left: 8px;
+  font-weight: 400;
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .navbar__logo-tag { display: block; }
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+}
+
+.navbar__links a {
+  color: rgba(255,255,255,0.9);
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.navbar__links a:hover,
+.navbar__links a.active {
+  color: var(--white);
+  background: rgba(255,255,255,0.15);
+}
+
+/* Cart button — sand/linen tone so it pops on teal */
+.navbar__cart {
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
+  background: rgba(230,215,200,0.2) !important;
+  border: 1.5px solid rgba(230,215,200,0.5) !important;
+  color: var(--white) !important;
+  padding: 8px 16px !important;
+  border-radius: 6px;
+  position: relative;
+  transition: var(--transition);
+}
+
+.navbar__cart:hover {
+  background: rgba(230,215,200,0.35) !important;
+  transform: translateY(-1px);
+}
+
+/* Badge — sand color with dark teal text */
+.navbar__cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #e6d7c8;
+  color: #1e6970;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar__burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  padding: 4px;
+}
+
+.navbar__burger span {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    background: linear-gradient(135deg, #1e6970, #3296a0);
+    padding: 14px 0;
+  }
+
+  .navbar__burger { display: flex; }
+
+  .navbar__links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #1e6970;
+    flex-direction: column;
+    padding: 16px;
+    gap: 4px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  }
+
+  .navbar__links--open { display: flex; }
+
+  .navbar__links a {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+  }
+}
