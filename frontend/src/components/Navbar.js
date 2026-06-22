@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import './Navbar.css';
-// Import your logo image (adjust the path as needed)
-import logo from '../assets/images/logo.png'; // or .svg, .jpg, etc.
+// Import your actual logo image – adjust the path
+import logo from '../assets/images/logo.png'; // or .svg, .webp, etc.
 
 export default function Navbar() {
   const { totalItems } = useCart();
@@ -32,12 +32,13 @@ export default function Navbar() {
       <div className="container navbar__inner">
         <Link to="/" className="navbar__logo">
           <img src={logo} alt="VYTT Restaurant & Butchery" />
-          <span className="navbar__logo-text">VYTT</span>
+          <span className="navbar__logo-v">V</span>
+          <span className="navbar__logo-text">YTT</span>
           <span className="navbar__logo-tag">Restaurant &amp; Butchery</span>
         </Link>
 
         <button
-          className="hamburger" // changed from navbar__burger to match CSS
+          className="hamburger"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
