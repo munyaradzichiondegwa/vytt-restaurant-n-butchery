@@ -1,6 +1,6 @@
 /* ===== NAVBAR ===== */
 .navbar {
-  background: linear-gradient(135deg, #0d4f29, #166016, #1a6b3c);
+  background: #0d4f29; /* solid dark green from flyers */
   color: #fff;
   display: flex;
   justify-content: space-between;
@@ -9,41 +9,56 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  border-bottom: 2px solid #f5b342; /* gold accent line */
 }
 
 .navbar__logo {
   display: flex;
   align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
 }
 
 .navbar__logo img {
-  height: 50px;
+  height: 45px; /* adjust to your logo size */
+  width: auto;
 }
 
-.navbar__logo-v {
-  color: #7de3a0;
-  font-size: 2rem;
+.navbar__logo-text {
+  font-size: 1.6rem;
   font-weight: 900;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.navbar__logo-tag {
+  font-size: 0.75rem;
+  color: #f5b342;
+  font-weight: 500;
+  margin-left: 0.25rem;
 }
 
 .navbar__links {
   list-style: none;
   display: flex;
   gap: 2rem;
+  align-items: center;
 }
 
 .navbar__links a {
   color: #fff;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s;
+  transition: color 0.3s, border-bottom 0.3s;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
 }
 
 .navbar__links a:hover,
 .navbar__links a.active {
-  color: #7de3a0;
-  text-shadow: 0 0 8px rgba(125,227,160,0.5);
+  color: #f5b342; /* gold on hover/active */
+  border-bottom-color: #f5b342;
 }
 
 .navbar__cart {
@@ -51,13 +66,20 @@
   color: #fff;
   font-size: 1.5rem;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.navbar__cart:hover {
+  color: #f5b342;
 }
 
 .navbar__cart-badge {
   position: absolute;
   top: -8px;
-  right: -10px;
-  background: #7de3a0;
+  right: -12px;
+  background: #f5b342; /* gold badge */
   color: #0d4f29;
   border-radius: 50%;
   width: 22px;
@@ -78,6 +100,12 @@
   padding: 0.2rem 0.6rem;
   border-radius: 4px;
   cursor: pointer;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.hamburger:hover {
+  border-color: #f5b342;
+  color: #f5b342;
 }
 
 @media (max-width: 768px) {
@@ -92,7 +120,8 @@
     padding: 1rem;
     gap: 1rem;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-top: 2px solid #f5b342;
   }
 
   .navbar__links.active {

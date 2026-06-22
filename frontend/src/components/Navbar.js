@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import './Navbar.css';
+// Import your logo image (adjust the path as needed)
+import logo from '../assets/logo.png'; // or .svg, .jpg, etc.
 
 export default function Navbar() {
   const { totalItems } = useCart();
@@ -22,23 +24,27 @@ export default function Navbar() {
   const isHome = location.pathname === '/';
 
   return (
-    <nav className={`navbar ${scrolled || !isHome ? 'navbar--solid' : ''} ${menuOpen ? 'navbar--open' : ''}`}>
+    <nav
+      className={`navbar ${scrolled || !isHome ? 'navbar--solid' : ''} ${
+        menuOpen ? 'navbar--open' : ''
+      }`}
+    >
       <div className="container navbar__inner">
         <Link to="/" className="navbar__logo">
-          <span className="navbar__logo-v">V</span>
-          <span className="navbar__logo-text">YTT</span>
+          <img src={logo} alt="VYTT Restaurant & Butchery" />
+          <span className="navbar__logo-text">VYTT</span>
           <span className="navbar__logo-tag">Restaurant &amp; Butchery</span>
         </Link>
 
         <button
-          className="navbar__burger"
+          className="hamburger" // changed from navbar__burger to match CSS
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
           <span></span><span></span><span></span>
         </button>
 
-        <ul className={`navbar__links ${menuOpen ? 'navbar__links--open' : ''}`}>
+        <ul className={`navbar__links ${menuOpen ? 'active' : ''}`}>
           <li><NavLink to="/">Home</NavLink></li>
           <li><NavLink to="/menu">Menu</NavLink></li>
           <li><NavLink to="/booking">Book a Table</NavLink></li>
@@ -46,11 +52,21 @@ export default function Navbar() {
           <li><NavLink to="/contact">Contact</NavLink></li>
           <li>
             <Link to="/cart" className="navbar__cart">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <circle cx="9" cy="21" r="1" />
+                <circle cx="20" cy="21" r="1" />
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
               </svg>
-              {totalItems > 0 && <span className="navbar__cart-badge">{totalItems}</span>}
+              {totalItems > 0 && (
+                <span className="navbar__cart-badge">{totalItems}</span>
+              )}
               <span>Order</span>
             </Link>
           </li>
