@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import './Navbar.css';
 // Import your actual logo image – adjust the path
-import logo from '../assets/images/logo.png'; // or .svg, .webp, etc.
+import logo from '..src/assets/images/logo.png'; // or .svg, .webp, etc.
 
 export default function Navbar() {
   const { totalItems } = useCart();
