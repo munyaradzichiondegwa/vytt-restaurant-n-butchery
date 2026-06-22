@@ -10,16 +10,6 @@ const menuItemSchema = new mongoose.Schema(
       type: String,
       required: true,
       enum: [
-        // ── Original categories kept for backward compat ──
-        'Starches',
-        'Mains',
-        'Delicacies',
-        'Butchery',
-        'Breakfast',
-        'Desserts',
-        'Beverages',
-        'Specials',
-        // ── Real Vittony Holdings menu categories ──
         'Traditional Starches',
         'Contemporary Starches',
         'Traditional Usavi',
@@ -29,6 +19,8 @@ const menuItemSchema = new mongoose.Schema(
         'Contemporary Bites',
         'Starters',
         'Salads',
+        'Breakfast',
+        'Desserts',
         'Hot Beverages',
         'Cold Beverages',
         'Ciders',
