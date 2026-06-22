@@ -1,46 +1,83 @@
-.menu-page__hero {
-  background: linear-gradient(135deg, #0d4f29, #166016);
-  color: #fff;
-  text-align: center;
-  padding: 4rem 1rem;
-}
-.menu-page__hero h1 { font-size: 2.8rem; margin-bottom: 0.5rem; }
-
-.menu-page__carousel {
+/* ===== HERO SLIDESHOW ===== */
+.menu-page__hero-slideshow {
   position: relative;
-  max-width: 500px;
-  margin: 2rem auto;
-  text-align: center;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #0d0d0d;
 }
-.carousel__btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.4);
-  border: none;
-  color: #fff;
-  font-size: 2rem;
-  padding: 0.3rem 0.8rem;
-  cursor: pointer;
-  border-radius: 50%;
-}
-.carousel__prev { left: -20px; }
-.carousel__next { right: -20px; }
-.carousel__dots {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-.carousel__dot {
-  width: 10px;
-  height: 10px;
-  background: #aaa;
-  border-radius: 50%;
-  cursor: pointer;
-}
-.carousel__dot.active { background: #7de3a0; }
 
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-slide--active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Fallback background if no image */
+.hero-slide:not([style*="background-image"]) {
+  background: linear-gradient(135deg, #0d4f29, #166016);
+}
+
+.hero-slide__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.hero-slide__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  max-width: 700px;
+  padding: 2rem;
+}
+
+.hero-slide__category {
+  display: block;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 1rem;
+  color: #7de3a0;
+}
+
+.hero-slide__content h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero-slide__content p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.hero-slide__price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #7de3a0;
+  display: inline-block;
+  background: rgba(0,0,0,0.5);
+  padding: 0.5rem 2rem;
+  border-radius: 40px;
+}
+
+/* ===== TABS (unchanged) ===== */
 .menu-page__tabs {
   display: flex;
   flex-wrap: wrap;
@@ -62,6 +99,8 @@
   color: #fff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
+
+/* ===== MENU GRID (unchanged) ===== */
 .menu-page__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
