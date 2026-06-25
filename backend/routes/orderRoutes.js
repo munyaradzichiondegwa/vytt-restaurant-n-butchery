@@ -1,21 +1,35 @@
 import express from 'express';
 import Order from '../models/orderModel.js';
-import { protect, admin } from '../middleware/authMiddleware.js';
+import { protect, optionalAuth, admin } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-// POST create order
-router.post('/', async (req, res) => {
+// POST create order — works for guests; links to the account automatically
+// when the customer is logged in (optionalAuth never blocks the request).
+router.post('/', optionalAuth, async (req, res) => {
   try {
-    const { customerName, phone, address, orderItems, totalPrice, isDelivery, notes } = req.body;
+    const { customerName, phone, address, orderItems, totalPrice, isDelivery, notes, paymentMethod, paymentNumber } = req.body;
     if (!orderItems || orderItems.length === 0) {
       return res.status(400).json({ message: 'No order items' });
     }
-    const order = new Order({ customerName, phone, address, orderItems, totalPrice, isDelivery, notes });
+    const order = new Order({
+      user: req.user ? req.user._id : undefined,
+      customerName, phone, address, orderItems, totalPrice, isDelivery, notes, paymentMethod, paymentNumber,
+    });
     const created = await order.save();
     res.status(201).json(created);
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+});
+
+// GET orders for the logged-in customer (repeat-customer order history)
+router.get('/myorders', protect, async (req, res) => {
+  try {
+    const orders = await Order.find({ user: req.user._id }).sort({ createdAt: -1 });
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 });
 

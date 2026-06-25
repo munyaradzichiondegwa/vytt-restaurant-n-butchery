@@ -17,9 +17,6 @@ export default function AboutPage() {
         <div className="container about-page__hero-content">
           <h1>About VYTT</h1>
           <p>Where tradition meets flavour, every single day.</p>
-          {!aboutHeroImg && (
-            <p className="about-page__hero-hint">Add <code>about-hero.jpg</code> to <code>src/assets/</code></p>
-          )}
         </div>
       </div>
 
@@ -68,7 +65,6 @@ export default function AboutPage() {
                   <h3>Events &amp; Conferences</h3>
                   <p>Professional venue for business meetings, weddings, and celebrations.</p>
                 </div>
-                <p className="about-story__img-hint">Add <code>about-story.jpg</code> to <code>src/assets/</code> to replace these cards</p>
               </>
             )}
           </div>

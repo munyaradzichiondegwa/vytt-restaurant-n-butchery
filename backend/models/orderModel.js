@@ -9,6 +9,7 @@ const orderItemSchema = new mongoose.Schema({
 
 const orderSchema = new mongoose.Schema(
   {
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // null for guest orders
     customerName: { type: String, required: true },
     phone: { type: String, required: true },
     address: { type: String },
@@ -16,6 +17,12 @@ const orderSchema = new mongoose.Schema(
     totalPrice: { type: Number, required: true },
     isDelivery: { type: Boolean, default: false },
     isPaid: { type: Boolean, default: false },
+    paymentMethod: {
+      type: String,
+      enum: ['ecocash', 'onemoney', 'innbucks', 'cash'],
+      default: 'cash',
+    },
+    paymentNumber: { type: String },
     status: {
       type: String,
       default: 'Pending',

@@ -96,7 +96,30 @@
 .checkout-form h3 {
   font-family: 'Playfair Display', serif;
   font-size: 1.4rem;
-  margin-bottom: 28px;
+  margin-bottom: 8px;
+}
+
+.checkout-account-note {
+  font-size: 0.85rem;
+  color: var(--gray);
+  background: var(--teal-pale);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  margin-bottom: 24px;
+}
+
+.checkout-account-note--guest {
+  background: var(--sand-light);
+}
+
+.checkout-account-note a {
+  color: var(--teal-dark);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.checkout-account-note a:hover {
+  text-decoration: underline;
 }
 
 .checkout-error {
@@ -468,6 +491,23 @@
 
 .checkout-wa { background: #25D366 !important; }
 .checkout-wa:hover { background: #1ebe59 !important; }
+
+.checkout-confirmed__signup-nudge {
+  font-size: 0.85rem;
+  color: var(--gray);
+  background: var(--teal-pale);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  margin-top: 20px;
+}
+
+.checkout-confirmed__signup-nudge a {
+  color: var(--teal-dark);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.checkout-confirmed__signup-nudge a:hover { text-decoration: underline; }
 
 .checkout-confirmed__back {
   background: none;

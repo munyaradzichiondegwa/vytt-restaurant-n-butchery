@@ -1,6 +1,21 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
 
 const CartContext = createContext();
+
+const STORAGE_KEY = 'vytt_cart_v1';
+
+const loadInitialState = () => {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed.items)) return parsed;
+    }
+  } catch {
+    // ignore corrupt/unavailable storage and fall back to empty cart
+  }
+  return { items: [] };
+};
 
 const cartReducer = (state, action) => {
   switch (action.type) {
@@ -36,7 +51,15 @@ const cartReducer = (state, action) => {
 };
 
 export const CartProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(cartReducer, { items: [] });
+  const [state, dispatch] = useReducer(cartReducer, undefined, loadInitialState);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch {
+      // storage unavailable (e.g. private browsing) — cart still works for this session
+    }
+  }, [state]);
 
   const addItem = (item) => dispatch({ type: 'ADD_ITEM', payload: item });
   const removeItem = (id) => dispatch({ type: 'REMOVE_ITEM', payload: id });

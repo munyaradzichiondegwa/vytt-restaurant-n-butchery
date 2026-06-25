@@ -1,16 +1,16 @@
 // frontend/src/pages/CheckoutPage.js
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import { createOrder } from '../api';
 import './CheckoutPage.css';
 
 const PAYMENT_METHODS = [
   { id: 'ecocash',    label: 'EcoCash',     icon: '📱', color: '#e05c00' },
-  { id: 'netone',     label: 'OneMoney',    icon: '📲', color: '#cc0000' },
-  { id: 'visa',       label: 'Visa',        icon: '💳', color: '#1a1f71' },
-  { id: 'mastercard', label: 'Mastercard',  icon: '💳', color: '#eb001b' },
-  { id: 'cash',       label: 'Pay on Site', icon: '💵', color: '#2d8a94' },
+  { id: 'onemoney',   label: 'OneMoney',    icon: '📲', color: '#cc0000' },
+  { id: 'innbucks',   label: 'InnBucks',    icon: '🏦', color: '#017172' },
+  { id: 'cash',       label: 'Pay on Site', icon: '💵', color: '#018684' },
 ];
 
 const ORDER_STATUSES = [
@@ -22,6 +22,7 @@ const ORDER_STATUSES = [
 
 export default function CheckoutPage() {
   const { items, totalPrice, clearCart } = useCart();
+  const { user, isLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   // Step: 'details' | 'payment' | 'confirmed'
@@ -29,13 +30,25 @@ export default function CheckoutPage() {
 
   const [form, setForm] = useState({
     customerName: '', phone: '', address: '',
-    isDelivery: false, notes: '',
+    isDelivery: false, notes: '', paymentNumber: '',
   });
   const [paymentMethod, setPaymentMethod] = useState('ecocash');
   const [loading, setLoading]   = useState(false);
   const [error, setError]       = useState('');
   const [placedOrder, setPlacedOrder] = useState(null);
   const [orderStatus, setOrderStatus] = useState('Pending');
+
+  // Repeat customers: fill in their saved details automatically.
+  useEffect(() => {
+    if (user) {
+      setForm((f) => ({
+        ...f,
+        customerName: f.customerName || user.name || '',
+        phone: f.phone || user.phone || '',
+        address: f.address || user.address || '',
+      }));
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     const val = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
@@ -68,26 +81,34 @@ export default function CheckoutPage() {
     if (items.length === 0) return;
     setLoading(true);
     setError('');
+
+    const localFallback = {
+      _id: 'LOCAL' + Date.now(),
+      customerName: form.customerName,
+      phone: form.phone,
+      address: form.address,
+      isDelivery: form.isDelivery,
+      totalPrice,
+    };
+
     try {
       const orderData = {
         ...form,
+        paymentMethod,
         orderItems: items.map((i) => ({ name: i.name, qty: i.qty, price: i.price, menuItem: i._id })),
         totalPrice,
       };
       const { data } = await createOrder(orderData);
-      setPlacedOrder(data);
+      // Guard against a malformed/non-JSON response (e.g. a proxy or
+      // cold-start page returned instead of real JSON) silently producing
+      // a broken confirmation screen.
+      const isValidOrder = data && typeof data === 'object' && data._id;
+      setPlacedOrder(isValidOrder ? data : localFallback);
       clearCart();
       setStep('confirmed');
     } catch {
       // If API unavailable, still show confirmation locally
-      setPlacedOrder({
-        _id: 'LOCAL' + Date.now(),
-        customerName: form.customerName,
-        phone: form.phone,
-        address: form.address,
-        isDelivery: form.isDelivery,
-        totalPrice,
-      });
+      setPlacedOrder(localFallback);
       clearCart();
       setStep('confirmed');
     } finally {
@@ -132,6 +153,18 @@ export default function CheckoutPage() {
           <div className="checkout-layout">
             <form className="checkout-form" onSubmit={handleDetailsNext}>
               <h3>Your Details</h3>
+
+              {isLoggedIn ? (
+                <p className="checkout-account-note">
+                  Logged in as <strong>{user.name}</strong> — your details are filled in below.
+                </p>
+              ) : (
+                <p className="checkout-account-note checkout-account-note--guest">
+                  Have an account? <Link to="/login" state={{ from: '/checkout' }}>Log in</Link> for faster checkout.
+                  Otherwise, just continue below as a guest — no account needed.
+                </p>
+              )}
+
               {error && <div className="checkout-error">{error}</div>}
 
               <div className="form-group">
@@ -207,34 +240,16 @@ export default function CheckoutPage() {
               </div>
 
               {/* Mobile money number field */}
-              {(paymentMethod === 'ecocash' || paymentMethod === 'netone') && (
+              {(paymentMethod === 'ecocash' || paymentMethod === 'onemoney' || paymentMethod === 'innbucks') && (
                 <div className="form-group" style={{ marginTop: 20 }}>
-                  <label>{paymentMethod === 'ecocash' ? 'EcoCash' : 'OneMoney'} Number</label>
-                  <input type="tel" placeholder="+263 7XX XXX XXX" />
-                </div>
-              )}
-
-              {/* Card fields */}
-              {(paymentMethod === 'visa' || paymentMethod === 'mastercard') && (
-                <div style={{ marginTop: 20 }}>
-                  <div className="form-group">
-                    <label>Cardholder Name</label>
-                    <input type="text" placeholder="Name on card" />
-                  </div>
-                  <div className="form-group">
-                    <label>Card Number</label>
-                    <input type="text" placeholder="1234 5678 9012 3456" maxLength={19} />
-                  </div>
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label>Expiry</label>
-                      <input type="text" placeholder="MM/YY" maxLength={5} />
-                    </div>
-                    <div className="form-group">
-                      <label>CVV</label>
-                      <input type="text" placeholder="123" maxLength={4} />
-                    </div>
-                  </div>
+                  <label>{PAYMENT_METHODS.find((p) => p.id === paymentMethod)?.label} Number</label>
+                  <input
+                    type="tel"
+                    name="paymentNumber"
+                    value={form.paymentNumber}
+                    onChange={handleChange}
+                    placeholder="+263 7XX XXX XXX"
+                  />
                 </div>
               )}
 
@@ -329,6 +344,13 @@ export default function CheckoutPage() {
                 💬 WhatsApp
               </a>
             </div>
+
+            {!isLoggedIn && (
+              <p className="checkout-confirmed__signup-nudge">
+                Ordering from VYTT again soon? <Link to="/register">Create an account</Link> to save your
+                details and track orders like this one — totally optional.
+              </p>
+            )}
 
             <button className="checkout-confirmed__back" onClick={() => navigate('/menu')}>
               Browse More →

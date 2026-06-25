@@ -27,8 +27,12 @@ const connectDB = async () => {
     const conn = await mongoose.connect(process.env.MONGO_URI);
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.error(`Error: ${error.message}`);
-    process.exit(1);
+    // Previously this called process.exit(1), which took the entire site
+    // down (including the static frontend) on any DB hiccup. Log instead
+    // and keep serving — the frontend has its own offline fallbacks
+    // (STATIC_MENU, local order confirmation) for exactly this case.
+    console.error(`MongoDB connection error: ${error.message}`);
+    console.error('Continuing without a database connection — API routes that need the DB will fail until it reconnects.');
   }
 };
 

@@ -8,14 +8,23 @@
 
 // ── SECTION HERO BACKGROUNDS ─────────────────────────────────────────────
 import heroImage from './images/hero.jpg';
-import aboutHeroImage    from './images/about-hero.jpg';
-import menuHeroImage     from './images/menu-hero.jpg';
-import bookingHeroImage  from './images/booking-hero.jpg';
-import contactHeroImage  from './images/contact-hero.jpg';
-import aboutStoryImage   from './images/about-story.jpg';
+// about-hero.jpg, menu-hero.jpg, contact-hero.jpg, booking-hero.jpg and
+// about-story.jpg were removed — they were full page mockups (wrong
+// placeholder logo + duplicate baked-in text) rather than plain photos,
+// which doubled up against the real on-page text when used as CSS
+// backgrounds. Drop a clean, text-free photo in as <name>.jpg and
+// uncomment the matching line below to bring a hero image back.
+// import aboutHeroImage    from './images/about-hero.jpg';
+// import menuHeroImage     from './images/menu-hero.jpg';
+// import bookingHeroImage  from './images/booking-hero.jpg';
+// import contactHeroImage  from './images/contact-hero.jpg';
+// import aboutStoryImage   from './images/about-story.jpg';
 
 // ── BOOKING VENUE CARDS ───────────────────────────────────────────────────
-import conferenceImage   from './images/venue-conference.jpg';
+// venue-conference.jpg removed for the same reason (flyer fragment with
+// baked-in text/social icons). venue-catering.jpg and venue-table.jpg are
+// genuine clean photos and are kept.
+// import conferenceImage   from './images/venue-conference.jpg';
 import cateringImage     from './images/venue-catering.jpg';
 import tableImage        from './images/venue-table.jpg';
 
@@ -31,14 +40,14 @@ import shawarmaImage     from './images/shawarma.jpg';
 // If you uncomment an import, replace null with the image variable.
 
 export const heroImg        = heroImage;
-export const aboutHeroImg   = aboutHeroImage;       // replace null with: aboutHeroImage
-export const menuHeroImg    = menuHeroImage;       // replace null with: menuHeroImage
-export const bookingHeroImg = bookingHeroImage;       // replace null with: bookingHeroImage
-export const contactHeroImg = contactHeroImage;       // replace null with: contactHeroImage
-export const aboutStoryImg  = aboutStoryImage;       // replace null with: aboutStoryImage
-export const conferenceImg  = conferenceImage;       // replace null with: conferenceImage
-export const cateringImg    = cateringImage;       // replace null with: cateringImage
-export const tableImg       = tableImage;       // replace null with: tableImage
+export const aboutHeroImg   = null;
+export const menuHeroImg    = null;
+export const bookingHeroImg = null;
+export const contactHeroImg = null;
+export const aboutStoryImg  = null;
+export const conferenceImg  = null;
+export const cateringImg    = cateringImage;
+export const tableImg       = tableImage;
 
 
 // ── MENU IMAGES MAP ───────────────────────────────────────────────────────

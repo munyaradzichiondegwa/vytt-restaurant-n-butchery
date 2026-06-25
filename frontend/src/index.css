@@ -2,15 +2,21 @@
 /* Color palette extracted directly from Vittony Holdings physical menu */
 
 :root {
-  /* ── VITTONY BRAND COLORS (from menu images) ── */
-  /* Teal — the bright teal used in menu panels, nav, footer */
-  --teal:        #3296a0;
-  --teal-dark:   #1e6970;
-  --teal-deeper: #14484e;
-  --teal-light:  #4db8c4;
-  --teal-pale:   #d0eef0;
+  /* ── VYTT BRAND COLORS ──────────────────────────────────────────────
+     Sampled directly (pixel-verified) from the official logo file.
+     V-mark left fold    -> red       #B7011D
+     V-mark right swoosh -> teal      #029591
+     "VYTT" wordmark text -> deep teal #017172
+     Divider linework    -> maroon    #7B0000
+     -------------------------------------------------------------------- */
+  --teal:        #029591;
+  --teal-dark:   #017172;
+  --teal-deeper: #005152;
+  --teal-light:  #4DB4B2;
+  --teal-pale:   #E5F4F4;
 
-  /* Sand / Linen — the warm background of the menu */
+  /* Sand / Linen — warm cream background, matches the logo's own backing
+     and the printed flyers */
   --sand:        #e6d7c8;
   --sand-dark:   #d4c0a8;
   --sand-light:  #f2ebe0;
@@ -28,9 +34,12 @@
   --gray-light:  #888888;
   --white:       #ffffff;
 
-  /* Accent — keep red only for prices/badges */
-  --red:         #c0392b;
-  --red-dark:    #922b21;
+  /* Brand red — the other half of the V-mark. Used throughout, not just
+     for badges/prices, so the two-tone logo identity actually shows up
+     on the site. */
+  --red:         #B7011D;
+  --red-dark:    #8E0016;
+  --maroon:      #7B0000;
   --gold:        #c9a84c;
 
   /* Legacy aliases so existing components don't break */

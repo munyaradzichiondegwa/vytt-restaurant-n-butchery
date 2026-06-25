@@ -10,7 +10,9 @@ export default function OrderConfirmPage() {
 
   useEffect(() => {
     fetchOrder(id)
-      .then((res) => setOrder(res.data))
+      .then((res) => {
+        if (res.data && typeof res.data === 'object' && res.data._id) setOrder(res.data);
+      })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, [id]);

@@ -23,7 +23,7 @@
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--teal), #4db8c4);
+  background: linear-gradient(90deg, var(--teal), #4DB4B2);
   z-index: 1;
 }
 
@@ -121,7 +121,7 @@
 .menu-card__option-price {
   font-weight: 700;
   font-family: 'Playfair Display', serif;
-  color: var(--teal-dark);
+  color: var(--red);
   margin-left: 8px;
 }
 
@@ -138,7 +138,7 @@
 .menu-card__price {
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--teal-dark);
+  color: var(--red);
   font-family: 'Playfair Display', serif;
 }
 

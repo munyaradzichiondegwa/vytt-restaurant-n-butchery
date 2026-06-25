@@ -7,10 +7,10 @@ import { heroImg, aboutStoryImg } from '../assets';
 import './HomePage.css';
 
 const SPECIALS = [
-  { day: 'Monday',  color: '#3296a0', icon: '🌿', title: 'Forget Monday Blues',  desc: 'Sadza & Chicken Offals — $1.50' },
-  { day: 'Tuesday', color: '#2d8a94', icon: '🤔', title: 'This or That',          desc: 'Mix traditional or contemporary dishes with cocktails & mocktails' },
-  { day: 'Friday',  color: '#1e6970', icon: '🍺', title: 'Friday Highlights',     desc: 'Usavi stews, shawarma, platters, burgers & ice-cold ciders' },
-  { day: 'Weekend', color: '#0f3a3e', icon: '🔥', title: 'Weekend Vibes',         desc: 'Hotdog vs Burger — 100% full flavour from $2.00' },
+  { day: 'Monday',  color: '#029591', icon: '🌿', title: 'Forget Monday Blues',  desc: 'Sadza & Chicken Offals — $1.50' },
+  { day: 'Tuesday', color: '#B7011D', icon: '🤔', title: 'This or That',          desc: 'Mix traditional or contemporary dishes with cocktails & mocktails' },
+  { day: 'Friday',  color: '#017172', icon: '🍺', title: 'Friday Highlights',     desc: 'Usavi stews, shawarma, platters, burgers & ice-cold ciders' },
+  { day: 'Weekend', color: '#7B0000', icon: '🔥', title: 'Weekend Vibes',         desc: 'Hotdog vs Burger — 100% full flavour from $2.00' },
 ];
 
 const SERVICES = [
@@ -28,7 +28,7 @@ export default function HomePage() {
 
   useEffect(() => {
     fetchFeaturedItems()
-      .then((res) => setFeatured(res.data))
+      .then((res) => setFeatured(Array.isArray(res.data) ? res.data : []))
       .catch(() => setFeatured([]))
       .finally(() => setLoading(false));
   }, []);

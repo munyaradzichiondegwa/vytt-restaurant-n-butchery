@@ -2,9 +2,10 @@
 /* Footer background: Vittony teal gradient matching nav */
 
 .footer {
-  background: linear-gradient(135deg, #1e6970 0%, #3296a0 60%, #2d8a94 100%);
+  background: linear-gradient(135deg, #017172 0%, #029591 60%, #018684 100%);
   color: rgba(255,255,255,0.85);
   padding-top: 64px;
+  border-top: 4px solid var(--red);
 }
 
 .footer__inner {
@@ -16,24 +17,52 @@
 
 .footer__logo {
   display: flex;
-  align-items: baseline;
-  gap: 2px;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 8px;
 }
 
-.footer__logo-v {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.4rem;
-  font-weight: 900;
-  /* Sand color to match navbar logo */
-  color: #e6d7c8;
+.footer__logo-mark {
+  height: 46px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.25));
 }
 
 .footer__logo-text {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
   color: var(--white);
+}
+
+.footer__social {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.footer__social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  color: var(--white);
+  transition: var(--transition);
+}
+
+.footer__social-icon:hover {
+  background: var(--red);
+  transform: translateY(-2px);
+}
+
+.footer__social-icon--whatsapp:hover {
+  background: #25D366;
 }
 
 .footer__tagline {

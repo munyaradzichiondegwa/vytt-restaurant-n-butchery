@@ -16,9 +16,6 @@ export default function ContactPage() {
         <div className="container contact-page__hero-content">
           <h1>Contact Us</h1>
           <p>We're always ready to serve you.</p>
-          {!contactHeroImg && (
-            <p className="contact-page__hero-hint">Add <code>contact-hero.jpg</code> to <code>src/assets/</code></p>
-          )}
         </div>
       </div>
 
